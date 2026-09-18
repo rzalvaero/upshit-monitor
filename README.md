@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Open Uptime Monitor
 
-## Getting Started
+Uptime Monitor pribadi dan elegan yang dibangun dengan **Next.js**, **Tailwind CSS**, dan **Supabase**. Pantau status server dan API Anda secara *real-time* dengan cron jobs otomatis, tanpa biaya berlangganan!
 
-First, run the development server:
+## ✨ Fitur
+- 🟢 **Monitoring Real-time:** Melacak status *Operational* atau *Down* dari Endpoint Anda.
+- ⚡ **Cron Otomatis:** Berjalan di latar belakang (Background) 24/7 menggunakan Vercel Cron.
+- 🎨 **UI/UX Premium:** Antarmuka bergaya *Glassmorphism* lengkap dengan fitur *Dark Mode*.
+- 📊 **Status Bars:** Riwayat *Uptime* bergaya batang vertikal mirip seperti *UptimeRobot*.
+- 🗄️ **Database Serverless:** Mendukung koneksi Postgres (dioptimalkan untuk Supabase).
+
+---
+
+## ⚡ Instalasi Instan (Cara Termudah)
+
+Cara termudah untuk menggunakan proyek ini untuk Anda sendiri adalah dengan men-deploy-nya langsung ke Vercel secara gratis. Anda hanya memerlukan akun **GitHub**, **Vercel**, dan **Supabase** (untuk Database).
+
+### Langkah 1: Siapkan Database Supabase
+1. Buat proyek baru di [Supabase](https://database.new/).
+2. Buka menu **Project Settings > Database**.
+3. Salin **Connection String (URI)** Anda. Pastikan Anda memiliki 2 buah link:
+   - **Transaction Pooler (Port 6543)** untuk `DATABASE_URL` (Contoh: `...pooler.supabase.com:6543/postgres?pgbouncer=true`)
+   - **Session Pooler (Port 5432)** untuk `DIRECT_URL` (Contoh: `...pooler.supabase.com:5432/postgres`)
+
+### Langkah 2: Deploy ke Vercel
+
+Cukup klik tombol di bawah ini. Vercel akan otomatis menyalin proyek ini ke akun GitHub Anda, meminta Anda memasukkan `DATABASE_URL` & `DIRECT_URL` tadi, lalu membuat tabel database-nya secara otomatis!
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/USERNAME_ANDA/NAMA_REPO_ANDA&env=DATABASE_URL,DIRECT_URL&envDescription=Masukkan%20koneksi%20Supabase%20(Pooler%206543%20dan%20Session%205432)%20untuk%20menyimpan%20riwayat%20pemantauan.)
+
+*(Catatan: Harap ganti `USERNAME_ANDA` dan `NAMA_REPO_ANDA` pada link tombol di atas sesuai dengan URL repositori GitHub tempat Anda mengupload kodingan ini nantinya)*
+
+### Langkah 3: Aktifkan Cron Job
+Setelah berhasil ter-deploy, jangan lupa masuk ke Dashboard Vercel proyek Anda:
+1. Pergi ke **Settings > Cron Jobs**.
+2. Pastikan rute `/api/cron/check` (yang sudah terkonfigurasi di `vercel.json`) berstatus aktif. Ini akan memastikan monitor Anda mengecek server setiap 5 menit.
+
+---
+
+## 💻 Instalasi Lokal (Bagi Pengembang)
+
+Jika Anda ingin menjalankan atau memodifikasi kode ini di komputer Anda sendiri:
 
 ```bash
+# 1. Clone repository
+git clone https://github.com/USERNAME_ANDA/NAMA_REPO_ANDA.git
+cd uptime
+
+# 2. Install dependencies
+npm install
+
+# 3. Setup file .env (Copy dan sesuaikan)
+cp .env.example .env
+
+# 4. Push Skema ke Database Anda
+npx prisma db push
+
+# 5. Jalankan server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka `http://localhost:3000` di browser Anda!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Dibangun dengan ❤️ oleh [Nama/Organisasi Anda]*
