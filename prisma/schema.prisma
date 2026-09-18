@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Monitor {
+  id          String   @id @default(uuid())
+  name        String
+  url         String
+  interval    Int      @default(5) // dalam menit
+  status      String   @default("UNKNOWN") // UP, DOWN, UNKNOWN
+  lastChecked DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  pings       Ping[]
+}
+
+model Ping {
+  id          String   @id @default(uuid())
+  monitorId   String
+  status      String   // UP, DOWN
+  latency     Int      // waktu respon dalam ms
+  timestamp   DateTime @default(now())
+
+  monitor     Monitor  @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+}
