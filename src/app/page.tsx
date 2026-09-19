@@ -5,7 +5,7 @@ import RefreshButton from './components/RefreshButton';
 import LoginModal from './components/LoginModal';
 import LogoutButton from './components/LogoutButton';
 import DeleteMonitorButton from './components/DeleteMonitorButton';
-import { Activity, CheckCircle2, XCircle, HelpCircle, ArrowRight, ServerCrash } from 'lucide-react';
+import { Activity, CheckCircle2, XCircle, HelpCircle, ArrowRight, ServerCrash, EyeOff } from 'lucide-react';
 
 const prisma = new PrismaClient();
 
@@ -168,9 +168,17 @@ export default async function Home() {
                       )}
                     </div>
 
-                    <a href={monitor.url} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline inline-flex items-center gap-1">
-                      {monitor.url} <ArrowRight size={14} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
-                    </a>
+                    {monitor.isHidden && !isAdmin ? (
+                      <span className="text-slate-400 dark:text-slate-500 text-sm font-medium inline-flex items-center gap-1.5 cursor-not-allowed select-none">
+                        <EyeOff size={14} /> https://********.***
+                      </span>
+                    ) : (
+                      <a href={monitor.url} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline inline-flex items-center gap-1.5">
+                        {monitor.url} 
+                        {monitor.isHidden && <span className="text-[10px] uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded ml-1 font-bold">Privat</span>}
+                        <ArrowRight size={14} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                      </a>
+                    )}
 
                     {/* Uptime Robot Style Bars */}
                     <div className="mt-5 flex items-end h-8 gap-[2px] w-full max-w-md">

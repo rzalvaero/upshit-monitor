@@ -50,6 +50,7 @@ export async function addMonitor(formData: FormData) {
   const name = formData.get('name') as string;
   let url = formData.get('url') as string;
   const interval = Number(formData.get('interval') || 5);
+  const isHidden = formData.get('isHidden') === 'true';
 
   if (!name || !url) {
     return { error: 'Nama dan URL tidak boleh kosong' };
@@ -66,6 +67,7 @@ export async function addMonitor(formData: FormData) {
         name,
         url,
         interval,
+        isHidden,
         status: 'UNKNOWN', // Belum dicek
       },
     });

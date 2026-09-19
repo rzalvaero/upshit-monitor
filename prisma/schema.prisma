@@ -14,6 +14,7 @@ model Monitor {
   url         String
   interval    Int      @default(5) // dalam menit
   status      String   @default("UNKNOWN") // UP, DOWN, UNKNOWN
+  isHidden    Boolean  @default(false)
   lastChecked DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

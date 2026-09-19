@@ -126,6 +126,19 @@ export default function AddMonitorForm() {
                   </div>
                 </div>
 
+                <label className="flex items-center gap-2 cursor-pointer mb-6 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                  <input 
+                    type="checkbox" 
+                    name="isHidden" 
+                    value="true"
+                    className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                  />
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Sembunyikan URL dari Publik
+                    <span className="block text-xs text-slate-500 font-normal mt-0.5">Pengunjung hanya akan melihat nama, namun tidak bisa mengetahui/mengklik link asli.</span>
+                  </span>
+                </label>
+
                 <button
                   type="submit"
                   disabled={loading}
