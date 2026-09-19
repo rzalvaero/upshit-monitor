@@ -40,10 +40,25 @@ Cukup klik tombol di bawah ini. Vercel akan otomatis menyalin proyek ini ke akun
 *(Catatan: Anda sekarang bisa langsung mengklik tombol di atas untuk men-deploy aplikasi Anda ke Vercel!)*
 
 ### Langkah 3: Aktifkan Cron Job (Otomatisasi)
-Karena Vercel gratis memiliki batasan Cron, sangat disarankan menggunakan pemicu eksternal gratis:
+Agar sistem bisa memantau *uptime* secara otomatis (misal: tiap 5 menit), Anda perlu memicu endpoint `/api/cron/check`. Karena Vercel gratis memiliki batasan jalannya cron, Anda bisa memilih salah satu dari dua cara di bawah ini:
+
+#### Opsi A: Menggunakan cron-job.org (Gratis & Paling Mudah)
 1. Buat akun gratis di [cron-job.org](https://cron-job.org).
-2. Buat Cronjob baru dan masukkan URL: `https://[DOMAIN-VERCEL-ANDA]/api/cron/check`
-3. Atur jadwal ke **Every 5 minutes**. Selesai! Web Anda akan mengecek status server otomatis setiap 5 menit.
+2. Di dashboard, klik tombol **CREATE CRONJOB**.
+3. Isi form dengan rincian berikut:
+   - **Title:** `Uptime Monitor Cron`
+   - **URL:** `https://[DOMAIN-VERCEL-ANDA]/api/cron/check`
+   - **Execution schedule:** Pilih `Every 5 minutes`
+4. Klik **CREATE**. Selesai! Web Anda akan mengecek status server otomatis.
+
+#### Opsi B: Menggunakan Hosting Sendiri / cPanel / VPS Linux
+Jika Anda sudah memiliki hosting cPanel atau VPS sendiri, Anda tidak perlu layanan pihak ketiga. Cukup masukkan perintah ini ke dalam *Cron Jobs* di cPanel Anda, atau jalankan perintah `crontab -e` di terminal VPS Anda:
+
+```bash
+# Menjalankan pengecekan setiap 5 menit menggunakan curl
+*/5 * * * * curl -s "https://[DOMAIN-VERCEL-ANDA]/api/cron/check" > /dev/null 2>&1
+```
+*(Jangan lupa ganti `[DOMAIN-VERCEL-ANDA]` dengan link website Vercel asli milik Anda!)*
 
 ---
 
