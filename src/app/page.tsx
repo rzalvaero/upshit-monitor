@@ -70,8 +70,8 @@ export default async function Home() {
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
               Uptime Monitor
             </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl">
-              Platform pemantauan server pribadi Anda. Memastikan aplikasi dan layanan Anda tetap menyala tanpa henti.
+            <p className="text-gray-500 dark:text-gray-400 mt-2">
+              Platform pemantauan Server, Memastikan aplikasi dan layanan Anda tetap menyala tanpa henti.
             </p>
           </div>
 
