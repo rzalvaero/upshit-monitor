@@ -18,10 +18,18 @@ Cara termudah untuk menggunakan proyek ini untuk Anda sendiri adalah dengan men-
 ### Langkah 1: Siapkan Database Supabase
 1. Buat proyek baru di [Supabase](https://database.new/).
 2. Buka menu **Project Settings > Database**.
-3. Salin **Connection String (URI)** Anda. Pastikan Anda memiliki 2 buah link:
-   - **Transaction Pooler (Port 6543)** untuk `DATABASE_URL` (Contoh: `...pooler.supabase.com:6543/postgres?pgbouncer=true`)
-   - **Session Pooler (Port 5432)** untuk `DIRECT_URL` (Contoh: `...pooler.supabase.com:5432/postgres`)
-   - **Password Rahasia** untuk `ADMIN_PASSWORD` (Bebas, contoh: `rahasia123` - untuk akses admin)
+3. Pastikan Anda memiliki 3 variabel berikut untuk diisi saat proses instalasi nanti:
+
+```env
+# 1. Transaction Pooler (Port 6543)
+DATABASE_URL="postgresql://postgres.xxx:xxx@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+
+# 2. Session Pooler (Port 5432)
+DIRECT_URL="postgresql://postgres.xxx:xxx@aws-0-ap-southeast-2.pooler.supabase.com:5432/postgres"
+
+# 3. Kata Sandi Rahasia (Bebas, digunakan untuk mengunci form tambah URL)
+ADMIN_PASSWORD="rahasia-admin-anda"
+```
 
 ### Langkah 2: Deploy ke Vercel
 
