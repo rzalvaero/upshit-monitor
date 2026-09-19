@@ -193,7 +193,7 @@ export default async function Home() {
 
                         if (ping) {
                           bgColor = ping.status === 'UP' ? 'bg-green-500' : 'bg-red-500';
-                          tooltipText = `${ping.status} • Latency: ${ping.latency}ms • Pukul: ${new Date(ping.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`;
+                          tooltipText = `${ping.status} • Latency: ${ping.latency}ms • Pukul: ${new Date(ping.timestamp).toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'})}`;
                         }
 
                         return (
@@ -229,7 +229,7 @@ export default async function Home() {
                     <div className="flex flex-col">
                       <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Cek Terakhir</span>
                       <span className="text-sm text-slate-700 dark:text-slate-300">
-                        {monitor.lastChecked ? new Date(monitor.lastChecked).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : 'Menunggu cron...'}
+                        {monitor.lastChecked ? new Date(monitor.lastChecked).toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'}) : 'Menunggu cron...'}
                       </span>
                     </div>
 
