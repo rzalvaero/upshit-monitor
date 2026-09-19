@@ -5,6 +5,7 @@ import RefreshButton from './components/RefreshButton';
 import LoginModal from './components/LoginModal';
 import LogoutButton from './components/LogoutButton';
 import DeleteMonitorButton from './components/DeleteMonitorButton';
+import ToggleHideButton from './components/ToggleHideButton';
 import { Activity, CheckCircle2, XCircle, HelpCircle, ArrowRight, ServerCrash, EyeOff } from 'lucide-react';
 
 const prisma = new PrismaClient();
@@ -174,7 +175,7 @@ export default async function Home() {
                       </span>
                     ) : (
                       <a href={monitor.url} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline inline-flex items-center gap-1.5">
-                        {monitor.url} 
+                        {monitor.url}
                         {monitor.isHidden && <span className="text-[10px] uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded ml-1 font-bold">Privat</span>}
                         <ArrowRight size={14} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                       </a>
@@ -193,7 +194,7 @@ export default async function Home() {
 
                         if (ping) {
                           bgColor = ping.status === 'UP' ? 'bg-green-500' : 'bg-red-500';
-                          tooltipText = `${ping.status} • Latency: ${ping.latency}ms • Pukul: ${new Date(ping.timestamp).toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'})}`;
+                          tooltipText = `${ping.status} • Latency: ${ping.latency}ms • Pukul: ${new Date(ping.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' })}`;
                         }
 
                         return (
@@ -229,12 +230,13 @@ export default async function Home() {
                     <div className="flex flex-col">
                       <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Cek Terakhir</span>
                       <span className="text-sm text-slate-700 dark:text-slate-300">
-                        {monitor.lastChecked ? new Date(monitor.lastChecked).toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'}) : 'Menunggu cron...'}
+                        {monitor.lastChecked ? new Date(monitor.lastChecked).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }) : 'Menunggu cron...'}
                       </span>
                     </div>
 
                     {isAdmin && (
-                      <div className="flex items-center justify-center ml-2 border-l border-slate-200 dark:border-slate-700 pl-6">
+                      <div className="flex items-center justify-center ml-2 border-l border-slate-200 dark:border-slate-700 pl-6 gap-2">
+                        <ToggleHideButton id={monitor.id} isHidden={monitor.isHidden} />
                         <DeleteMonitorButton id={monitor.id} name={monitor.name} />
                       </div>
                     )}

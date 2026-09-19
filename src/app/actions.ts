@@ -15,7 +15,7 @@ async function isAuthenticated() {
 
 export async function login(password: string) {
   const adminPassword = process.env.ADMIN_PASSWORD;
-  
+
   if (!adminPassword) {
     return { error: 'Sistem belum dikonfigurasi. Harap set ADMIN_PASSWORD di .env' };
   }
@@ -74,7 +74,7 @@ export async function addMonitor(formData: FormData) {
 
     // Refresh halaman agar data terbaru langsung muncul
     revalidatePath('/');
-    
+
     return { success: true };
   } catch (error) {
     console.error('Failed to add monitor:', error);
@@ -94,7 +94,7 @@ export async function deleteMonitor(id: string) {
     await prisma.ping.deleteMany({
       where: { monitorId: id },
     });
-    
+
     // Menghapus data monitor
     await prisma.monitor.delete({
       where: { id },
@@ -105,5 +105,24 @@ export async function deleteMonitor(id: string) {
   } catch (error) {
     console.error('Failed to delete monitor:', error);
     return { error: 'Gagal menghapus monitor' };
+  }
+}
+
+export async function toggleHideMonitor(id: string, currentStatus: boolean) {
+  if (!(await isAuthenticated())) {
+    return { error: 'Akses Ditolak: Anda belum login sebagai Admin' };
+  }
+
+  try {
+    await prisma.monitor.update({
+      where: { id },
+      data: { isHidden: !currentStatus },
+    });
+
+    revalidatePath('/');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to toggle monitor visibility:', error);
+    return { error: 'Gagal mengubah status visibilitas URL' };
   }
 }
