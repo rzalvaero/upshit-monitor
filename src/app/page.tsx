@@ -224,6 +224,12 @@ export default async function Home() {
                         {monitor.lastChecked ? new Date(monitor.lastChecked).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : 'Menunggu cron...'}
                       </span>
                     </div>
+
+                    {isAdmin && (
+                      <div className="flex items-center justify-center ml-2 border-l border-slate-200 dark:border-slate-700 pl-6">
+                        <DeleteMonitorButton id={monitor.id} name={monitor.name} />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))
