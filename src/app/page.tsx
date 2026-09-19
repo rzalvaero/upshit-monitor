@@ -1,6 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { cookies } from 'next/headers';
 import AddMonitorForm from './components/AddMonitorForm';
 import RefreshButton from './components/RefreshButton';
+import LoginModal from './components/LoginModal';
+import LogoutButton from './components/LogoutButton';
 import { Activity, CheckCircle2, XCircle, HelpCircle, ArrowRight, ServerCrash } from 'lucide-react';
 
 const prisma = new PrismaClient();
@@ -9,6 +12,10 @@ const prisma = new PrismaClient();
 export const revalidate = 30;
 
 export default async function Home() {
+  // Cek Auth di level Server
+  const cookieStore = await cookies();
+  const isAdmin = cookieStore.get('auth_token')?.value === 'true';
+
   const monitors = await prisma.monitor.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
@@ -36,8 +43,9 @@ export default async function Home() {
     // Jika belum ada data ping, tampilkan 100% atau 0% (kita pakai 100% sebagai awalan yang baik)
     if (total === 0) return 100;
 
-    // Format ke 2 angka desimal, misal: 99.98
-    return ((upCount / total) * 100).toFixed(2);
+    // Format ke 2 angka desimal, tapi hilangkan .00 jika pas 100%
+    const percent = (upCount / total) * 100;
+    return parseFloat(percent.toFixed(2));
   };
 
   const upCount = monitors.filter((m) => m.status === 'UP').length;
@@ -116,7 +124,14 @@ export default async function Home() {
 
             <div className="flex items-center gap-3">
               <RefreshButton />
-              <AddMonitorForm />
+              {isAdmin ? (
+                <>
+                  <AddMonitorForm />
+                  <LogoutButton />
+                </>
+              ) : (
+                <LoginModal />
+              )}
             </div>
           </div>
 
