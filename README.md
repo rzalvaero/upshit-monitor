@@ -4,7 +4,7 @@ Uptime Monitor pribadi dan elegan yang dibangun dengan **Next.js**, **Tailwind C
 
 ## ✨ Fitur
 - 🟢 **Monitoring Real-time:** Melacak status *Operational* atau *Down* dari Endpoint Anda.
-- ⚡ **Cron Otomatis:** Berjalan di latar belakang (Background) 24/7 menggunakan Vercel Cron.
+- ⚡ **Cron Otomatis:** Berjalan di latar belakang (Background) 24/7 (Disarankan menggunakan cron-job.org).
 - 🎨 **UI/UX Premium:** Antarmuka bergaya *Glassmorphism* lengkap dengan fitur *Dark Mode*.
 - 📊 **Status Bars:** Riwayat *Uptime* bergaya batang vertikal mirip seperti *UptimeRobot*.
 - 🗄️ **Database Serverless:** Mendukung koneksi Postgres (dioptimalkan untuk Supabase).
@@ -31,10 +31,11 @@ Cukup klik tombol di bawah ini. Vercel akan otomatis menyalin proyek ini ke akun
 
 *(Catatan: Anda sekarang bisa langsung mengklik tombol di atas untuk men-deploy aplikasi Anda ke Vercel!)*
 
-### Langkah 3: Aktifkan Cron Job
-Setelah berhasil ter-deploy, jangan lupa masuk ke Dashboard Vercel proyek Anda:
-1. Pergi ke **Settings > Cron Jobs**.
-2. Pastikan rute `/api/cron/check` (yang sudah terkonfigurasi di `vercel.json`) berstatus aktif. Ini akan memastikan monitor Anda mengecek server setiap 5 menit.
+### Langkah 3: Aktifkan Cron Job (Otomatisasi)
+Karena Vercel gratis memiliki batasan Cron, sangat disarankan menggunakan pemicu eksternal gratis:
+1. Buat akun gratis di [cron-job.org](https://cron-job.org).
+2. Buat Cronjob baru dan masukkan URL: `https://[DOMAIN-VERCEL-ANDA]/api/cron/check`
+3. Atur jadwal ke **Every 5 minutes**. Selesai! Web Anda akan mengecek status server otomatis setiap 5 menit.
 
 ---
 
