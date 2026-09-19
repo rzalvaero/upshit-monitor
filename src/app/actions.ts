@@ -79,3 +79,29 @@ export async function addMonitor(formData: FormData) {
     return { error: 'Gagal menyimpan URL ke database' };
   }
 }
+
+export async function deleteMonitor(id: string) {
+  // KEAMANAN UTAMA: Cek Autentikasi sebelum memproses
+  if (!(await isAuthenticated())) {
+    return { error: 'Akses Ditolak: Anda belum login sebagai Admin' };
+  }
+
+  try {
+    // Karena ada relasi cascade (jika diset) atau hapus manual pingnya dulu
+    // Menghapus data ping terkait
+    await prisma.ping.deleteMany({
+      where: { monitorId: id },
+    });
+    
+    // Menghapus data monitor
+    await prisma.monitor.delete({
+      where: { id },
+    });
+
+    revalidatePath('/');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to delete monitor:', error);
+    return { error: 'Gagal menghapus monitor' };
+  }
+}

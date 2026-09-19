@@ -4,6 +4,7 @@ import AddMonitorForm from './components/AddMonitorForm';
 import RefreshButton from './components/RefreshButton';
 import LoginModal from './components/LoginModal';
 import LogoutButton from './components/LogoutButton';
+import DeleteMonitorButton from './components/DeleteMonitorButton';
 import { Activity, CheckCircle2, XCircle, HelpCircle, ArrowRight, ServerCrash } from 'lucide-react';
 
 const prisma = new PrismaClient();
