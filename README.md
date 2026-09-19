@@ -27,9 +27,9 @@ Cara termudah untuk menggunakan proyek ini untuk Anda sendiri adalah dengan men-
 
 Cukup klik tombol di bawah ini. Vercel akan otomatis menyalin proyek ini ke akun GitHub Anda, meminta Anda memasukkan ketiga variabel di atas, lalu membuat tabel database-nya secara otomatis!
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/USERNAME_ANDA/NAMA_REPO_ANDA&env=DATABASE_URL,DIRECT_URL,ADMIN_PASSWORD&envDescription=Masukkan%20koneksi%20Supabase%20dan%20Password%20Admin%20untuk%20mengamankan%20dashboard%20Anda.)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/rzalvaero/upshit-monitor&env=DATABASE_URL,DIRECT_URL,ADMIN_PASSWORD&envDescription=Masukkan%20koneksi%20Supabase%20dan%20Password%20Admin%20untuk%20mengamankan%20dashboard%20Anda.)
 
-*(Catatan: Harap ganti `USERNAME_ANDA` dan `NAMA_REPO_ANDA` pada link tombol di atas sesuai dengan URL repositori GitHub tempat Anda mengupload kodingan ini nantinya)*
+*(Catatan: Anda sekarang bisa langsung mengklik tombol di atas untuk men-deploy aplikasi Anda ke Vercel!)*
 
 ### Langkah 3: Aktifkan Cron Job
 Setelah berhasil ter-deploy, jangan lupa masuk ke Dashboard Vercel proyek Anda:
@@ -44,7 +44,7 @@ Jika Anda ingin menjalankan atau memodifikasi kode ini di komputer Anda sendiri:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/USERNAME_ANDA/NAMA_REPO_ANDA.git
+git clone https://github.com/rzalvaero/upshit-monitor.git
 cd uptime
 
 # 2. Install dependencies
